@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "dev-local": "astro dev --port 8080"
+    "dev-local": "astro dev --host --port 8080"
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.0.0",

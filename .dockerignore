@@ -1,3 +1,12 @@
 .DS_Store
 node_modules
 dist
+compose.yaml
+Dockerfile
+Dockerfile.test
+.env
+.dockerignore
+.gitignore
+CHANGELOG.md
+README.md
+.vscode
