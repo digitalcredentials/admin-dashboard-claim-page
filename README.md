@@ -58,5 +58,15 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
+## Change logo
+
+You can change the logo two ways:
+
+1. Check out this repository, and change the logo image in Layout.astro. If you are using the claim page as a Docker image, you'll have to then build a new image. If you are running this in a Docker compose, you'll have to make sure the compose points at your image in either your local docker cache or in Docker Hub if you've published the image there. Or you can set the Docker compose to use your checked out copy as the build context.
+
+2. Set the url for your logo as an env in the [dcc-admin-dashboard](https://github.com/digitalcredentials/dcc-admin-dashboard). You can also set the width and height. Read about how to do that in the [dcc-admin-dashboard README](https://github.com/digitalcredentials/dcc-admin-dashboard/blob/main/README.md#claim-page-logo/).
+
+The advantage to the second approach is that you avoid having to maintain your own copy of the claim page code - which carries the consequent hassle of having to update your code to stay current with any changes that might be made to the DCC version of the claim page code.
+
 ## License
 MIT © [MIT](#)

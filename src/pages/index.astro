@@ -7,6 +7,7 @@ import Modal from '../components/Modal.astro';
 
 import Placeholder from '../assets/images/placeholder.png';
 import Button from '../components/Button.astro';
+import Logo from '../assets/images/logo.png';
 ---
 
 <Layout title="Getting Credential...">
@@ -38,12 +39,32 @@ import Button from '../components/Button.astro';
     const info1 = document.getElementById('info-1') as HTMLParagraphElement;
     const info2 = document.getElementById('info-2') as HTMLParagraphElement;
     const qrcode = document.getElementById('qr-code') as HTMLImageElement;
+    const logo = document.getElementById('logo') as HTMLImageElement;
     const directAnchorLink = document.getElementById('link-direct') as HTMLAnchorElement;
     
     title.innerText = 'Getting Credential...';
 
     try {
     
+        const logoResponse = await fetch(`${payloadUrl}/claim-config`);
+        
+        if (logoResponse.status === 200) {
+  
+            const {logoURL,logoWidth,logoHeight} = (await logoResponse.json()) as {
+                logoURL: string;
+                logoWidth: string;
+                logoHeight: string;
+            }
+            // bust the cache
+            await fetch(logoURL, {cache: 'reload', mode: 'no-cors'})
+            if (logoURL !== 'default') {
+                logo.src = logoURL;
+                logo.height = logoHeight;
+                logo.width = logoWidth;
+                logo.class = '';
+            } 
+        } 
+
         const res = await fetch(`${payloadUrl}/get-credential-links`, {
             headers: { Authorization: `Bearer ${token}` },
         });
@@ -104,6 +125,6 @@ import Button from '../components/Button.astro';
         }
     } catch (error) {
         console.error(error);
-        window.location.href = `${basePath}/error`;
+       window.location.href = `${basePath}/error`;
     }
 </script>
